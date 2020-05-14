@@ -1,11 +1,12 @@
 # winston-azure-functions
 
-[![Build Status](https://img.shields.io/travis/upcompass/winston-azure-functions/master.svg?style=flat)](https://travis-ci.org/upcompass/winston-azure-functions)
-[![Dependencies](https://img.shields.io/david/upcompass/winston-azure-functions.svg?style=flat)](https://david-dm.org/upcompass/winston-azure-functions)
+[![Build Status](https://travis-ci.com/pexxi/winston-azure-functions.svg?branch=master)](https://travis-ci.org/pexxi/winston-azure-functions)
+[![Dependencies Status](https://david-dm.org/pexxi/winston-azure-functions/status.svg)](https://david-dm.org/pexxi/winston-azure-functions)
 
 ## How to use
 
 ### Setup
+
 Install it:
 
 ```bash
@@ -17,14 +18,13 @@ yarn add winston-azure-functions
 ```
 
 ### Usage
+
 ```typescript
 import { AzureFunctions } from 'winston-azure-functions'
 import winston = require('winston')
 module.exports = (context) => {
   winston.configure({
-    transports: [
-      new AzureFunctions({ context })
-    ]
+    transports: [new AzureFunctions({ context })],
   })
   winston.info('Initializing function')
   context.done()
