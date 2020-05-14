@@ -3,19 +3,48 @@
   "version": "0.0.3",
   "description": "Winston transport for azure functions",
   "main": "dist/index.js",
+  "keywords": [
+    "winston",
+    "logging",
+    "azure",
+    "functions"
+  ],
   "scripts": {
     "test": "jest",
     "prepare": "taskr"
   },
+  "author": "hello@pexxi.dev",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pexxi/winston-azure-functions.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pexxi/winston-azure-functions/issues"
+  },
+  "homepage": "https://github.com/pexxi/winston-azure-functions",
+  "dependencies": {
+    "winston": "^3.2.1",
+    "winston-transport": "^4.3.0"
+  },
+  "devDependencies": {
+    "@taskr/clear": "^1.1.0",
+    "@taskr/esnext": "^1.1.0",
+    "@taskr/shell": "^1.1.0",
+    "@types/jest": "^25.2.2",
+    "husky": "^4.2.5",
+    "jest": "^26.0.1",
+    "lint-staged": "^10.2.2",
+    "prettier": "^2.0.5",
+    "taskr": "^1.1.0",
+    "ts-jest": "^25.5.1",
+    "tslint": "^6.1.2",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.9.2"
+  },
   "prettier": {
     "semi": false,
     "singleQuote": true
-  },
-  "lint-staged": {
-    "*.ts": [
-      "prettier --no-semi --single-quote --write",
-      "git add"
-    ]
   },
   "jest": {
     "transform": {
@@ -33,44 +62,15 @@
       "/dist/"
     ]
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/upcompass/winston-azure-functions.git"
-  },
-  "keywords": [
-    "winston",
-    "logging",
-    "azure",
-    "functions"
-  ],
-  "author": "oss@e107.com.ar",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/upcompass/winston-azure-functions/issues"
-  },
-  "homepage": "https://github.com/upcompass/winston-azure-functions#readme",
-  "dependencies": {
-    "winston": "^3.2.1",
-    "winston-transport": "^4.3.0"
-  },
-  "devDependencies": {
-    "@taskr/clear": "^1.1.0",
-    "@taskr/esnext": "^1.1.0",
-    "@taskr/shell": "^1.1.0",
-    "@types/jest": "^25.2.2",
-    "husky": "^3.0.8",
-    "jest": "^24.5.0",
-    "lint-staged": "^10.2.2",
-    "prettier": "^1.16.4",
-    "taskr": "^1.1.0",
-    "ts-jest": "^24.0.0",
-    "tslint": "^5.14.0",
-    "tslint-config-prettier": "^1.18.0",
-    "typescript": "^3.3.4000"
-  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "prettier --no-semi --single-quote --write",
+      "git add"
+    ]
   }
 }
