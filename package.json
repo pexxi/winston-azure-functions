@@ -10,8 +10,11 @@
     "functions"
   ],
   "scripts": {
+    "build": "yarn clean && yarn compile",
+    "compile": "tsc -p tsconfig.build.json",
+    "clean": "rimraf dist",
     "test": "jest",
-    "prepare": "taskr"
+    "prepare": "yarn build"
   },
   "author": "hello@pexxi.dev",
   "license": "MIT",
@@ -28,15 +31,12 @@
     "winston-transport": "^4.3.0"
   },
   "devDependencies": {
-    "@taskr/clear": "^1.1.0",
-    "@taskr/esnext": "^1.1.0",
-    "@taskr/shell": "^1.1.0",
     "@types/jest": "^25.2.2",
     "husky": "^4.2.5",
     "jest": "^26.0.1",
     "lint-staged": "^10.2.2",
     "prettier": "^2.0.5",
-    "taskr": "^1.1.0",
+    "rimraf": "^3.0.2",
     "ts-jest": "^25.5.1",
     "tslint": "^6.1.2",
     "tslint-config-prettier": "^1.18.0",
