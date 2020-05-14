@@ -1,5 +1,5 @@
 import { LogEntry } from 'winston'
-import TransportStream, { TransportStreamOptions } from 'winston-transport'
+import TransportStream = require('winston-transport')
 
 /**
  * Azure Functions supported log levels.
@@ -15,7 +15,8 @@ export type AzureFunctionsLogLevel = 'error' | 'warn' | 'info' | 'verbose'
  * @property {AzureFunctionsLogLevel} [level] - Specifies the maximum severity
  *   level of messages that the transport should log.
  */
-export interface AzureFunctionsStreamOptions extends TransportStreamOptions {
+export interface AzureFunctionsStreamOptions
+  extends TransportStream.TransportStreamOptions {
   context: any
   level?: AzureFunctionsLogLevel
 }
@@ -62,9 +63,9 @@ export class AzureFunctions extends TransportStream {
    * Core logging method exposed to Winston.
    * @param {LogEntry} info - LogEntry object containing level and message.
    * @param {Function} callback - TODO: add param description.
-   * @returns {undefined}
+   * @returns {void}
    */
-  log({ level, message }: LogEntry, callback: () => void) {
+  log({ level, message }: LogEntry, callback: () => void): void {
     if (this.context.log[level]) {
       this.context.log[level](message)
     } else {
