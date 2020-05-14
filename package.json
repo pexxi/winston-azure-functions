@@ -1,6 +1,6 @@
 {
   "name": "winston-azure-functions",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Winston transport for azure functions",
   "main": "dist/index.js",
   "keywords": [
