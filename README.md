@@ -10,18 +10,22 @@
 Install it:
 
 ```bash
-npm install winston-azure-functions --save
+npm install @pexxi/winston-azure-functions --save
 ```
 
 ```bash
-yarn add winston-azure-functions
+yarn add @pexxi/winston-azure-functions
 ```
 
 ### Usage
 
+Create a logger component, where you can configure Winston:
+
 ```typescript
+import { Context } from '@azure/functions'
 import { AzureFunctions } from 'winston-azure-functions'
 import winston = require('winston')
+
 module.exports = (context) => {
   winston.configure({
     transports: [new AzureFunctions({ context })],
@@ -29,6 +33,19 @@ module.exports = (context) => {
   winston.info('Initializing function')
   context.done()
 }
+
+export default winston
+```
+
+Now you can use it in your code, e.g.:
+
+```typescript
+import logger from "./logger";
+
+...
+
+logger.info("Logging on info level...")
+
 ```
 
 ### Supported log levels
