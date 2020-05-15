@@ -7,11 +7,13 @@
 
 ### Setup
 
-Install it:
+Install with npm:
 
 ```bash
 npm install @pexxi/winston-azure-functions --save
 ```
+
+or with Yarn:
 
 ```bash
 yarn add @pexxi/winston-azure-functions
@@ -26,27 +28,40 @@ import { Context } from '@azure/functions'
 import { AzureFunctions } from 'winston-azure-functions'
 import winston = require('winston')
 
-module.exports = (context) => {
+export const configure = (context: Context) => {
   winston.configure({
     transports: [new AzureFunctions({ context })],
   })
-  winston.info('Initializing function')
-  context.done()
 }
 
 export default winston
 ```
 
-Now you can use it in your code, e.g.:
+In your function, call configure first passing function context as parameter:
 
 ```typescript
-import logger from "./logger";
+import { Context } from '@azure/functions'
+import logger, { configure } from "../src/utils/logger";
+...
+module.exports = function(context: Context) {
+  configure(context)
+  // rest of the function code...
+  logger.info("Logging some stuff...")
+};
+```
+
+Now you can use it in the rest of your code, e.g.:
+
+```typescript
+import logger from "./logger"
 
 ...
 
 logger.info("Logging on info level...")
 
 ```
+
+Just remember to configure your logger in each function before using it anywhere else during the execution.
 
 ### Supported log levels
 
