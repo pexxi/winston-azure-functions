@@ -3,6 +3,8 @@
 [![Build Status](https://travis-ci.com/pexxi/winston-azure-functions.svg?branch=master)](https://travis-ci.org/pexxi/winston-azure-functions)
 [![Dependencies Status](https://david-dm.org/pexxi/winston-azure-functions/status.svg)](https://david-dm.org/pexxi/winston-azure-functions)
 
+This is a fork of https://github.com/upcompass/winston-azure-functions with TypeScript build errors fixed.
+
 ## How to use
 
 ### Setup
@@ -10,7 +12,7 @@
 Install with npm:
 
 ```bash
-npm install @pexxi/winston-azure-functions --save
+npm install --save @pexxi/winston-azure-functions
 ```
 
 or with Yarn:
@@ -41,10 +43,10 @@ In your function, call configure first passing function context as parameter:
 
 ```typescript
 import { Context } from '@azure/functions'
-import logger, { configure } from "../src/utils/logger";
+import logger, { configureLogger } from "../src/utils/logger";
 ...
 module.exports = function(context: Context) {
-  configure(context)
+  configureLogger(context)
   // rest of the function code...
   logger.info("Logging some stuff...")
 };

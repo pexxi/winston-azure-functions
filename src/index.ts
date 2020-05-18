@@ -1,11 +1,12 @@
-import { LogEntry } from 'winston'
-import TransportStream = require('winston-transport')
+import { LogEntry } from "winston";
+import { LEVEL, MESSAGE } from "triple-beam";
+import TransportStream = require("winston-transport");
 
 /**
  * Azure Functions supported log levels.
  * @type { 'error' | 'warn' | 'info' | 'verbose' }
  */
-export type AzureFunctionsLogLevel = 'error' | 'warn' | 'info' | 'verbose'
+export type AzureFunctionsLogLevel = "error" | "warn" | "info" | "verbose";
 
 /**
  * Options object interface for AzureFunctions transport stream constructor.
@@ -17,8 +18,8 @@ export type AzureFunctionsLogLevel = 'error' | 'warn' | 'info' | 'verbose'
  */
 export interface AzureFunctionsStreamOptions
   extends TransportStream.TransportStreamOptions {
-  context: any
-  level?: AzureFunctionsLogLevel
+  context: any;
+  level?: AzureFunctionsLogLevel;
 }
 
 /**
@@ -31,20 +32,20 @@ export class AzureFunctions extends TransportStream {
    * An Azure Function context object.
    * @member {Object}
    */
-  context: any
+  context: any;
 
   /**
    * Specifies the maximum severity level of messages that the transport should
    * log.
    * @member {AzureFunctionsLogLevel}
    */
-  level: AzureFunctionsLogLevel
+  level: AzureFunctionsLogLevel;
 
   /**
    * The name of the TransportStream.
    * @member {string}
    */
-  name: string
+  name: string;
 
   /**
    * Constructor function for the AzureFunctions transport object responsible
@@ -53,10 +54,10 @@ export class AzureFunctions extends TransportStream {
    * @param {AzureFunctionsStreamOptions}
    */
   constructor(options: AzureFunctionsStreamOptions) {
-    super(options)
-    this.name = 'azure-functions'
-    this.context = options.context
-    this.level = options.level || 'info'
+    super(options);
+    this.name = "azure-functions";
+    this.context = options.context;
+    this.level = options.level || "info";
   }
 
   /**
@@ -65,12 +66,24 @@ export class AzureFunctions extends TransportStream {
    * @param {Function} callback - TODO: add param description.
    * @returns {void}
    */
-  log({ level, message }: LogEntry, callback: () => void): void {
-    if (this.context.log[level]) {
-      this.context.log[level](message)
-    } else {
-      this.context.log(`[${level}]`, message)
+  log(info: LogEntry, callback: () => void): void {
+    setImmediate(() => {
+      this.emit("logged", info);
+    });
+
+    let message = info[MESSAGE];
+    if (this.format) {
+      message = this.format.transform(info);
     }
-    callback()
+
+    if (this.context.log[info[LEVEL]]) {
+      this.context.log[info[LEVEL]](message);
+    } else {
+      this.context.log(`[${info[LEVEL]}]`, message);
+    }
+
+    if (callback) {
+      callback();
+    }
   }
 }

@@ -1,6 +1,6 @@
-import { LogEntry } from 'winston';
-import TransportStream = require('winston-transport');
-export declare type AzureFunctionsLogLevel = 'error' | 'warn' | 'info' | 'verbose';
+import { LogEntry } from "winston";
+import TransportStream = require("winston-transport");
+export declare type AzureFunctionsLogLevel = "error" | "warn" | "info" | "verbose";
 export interface AzureFunctionsStreamOptions extends TransportStream.TransportStreamOptions {
     context: any;
     level?: AzureFunctionsLogLevel;
@@ -10,5 +10,5 @@ export declare class AzureFunctions extends TransportStream {
     level: AzureFunctionsLogLevel;
     name: string;
     constructor(options: AzureFunctionsStreamOptions);
-    log({ level, message }: LogEntry, callback: () => void): void;
+    log(info: LogEntry, callback: () => void): void;
 }
