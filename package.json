@@ -71,6 +71,7 @@
   },
   "lint-staged": {
     "*.ts": [
+      "yarn test",
       "prettier --write",
       "git add"
     ]
