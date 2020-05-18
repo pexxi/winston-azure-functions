@@ -5,6 +5,8 @@
 
 This is a fork of https://github.com/upcompass/winston-azure-functions with TypeScript build errors fixed.
 
+Basically, this transport pipes all output to Azure Functions' `context.log()`.
+
 ## How to use
 
 ### Setup
@@ -26,17 +28,17 @@ yarn add @pexxi/winston-azure-functions
 Create a logger component, where you can configure Winston:
 
 ```typescript
-import { Context } from '@azure/functions'
-import { AzureFunctions } from 'winston-azure-functions'
-import winston = require('winston')
+import { Context } from "@azure/functions";
+import { AzureFunctions } from "winston-azure-functions";
+import winston = require("winston");
 
 export const configure = (context: Context) => {
   winston.configure({
     transports: [new AzureFunctions({ context })],
-  })
-}
+  });
+};
 
-export default winston
+export default winston;
 ```
 
 In your function, call configure first passing function context as parameter:

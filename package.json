@@ -1,7 +1,7 @@
 {
   "name": "@pexxi/winston-azure-functions",
   "version": "0.1.0",
-  "description": "Winston transport for azure functions",
+  "description": "Winston transport for Azure Functions",
   "main": "dist/index.js",
   "keywords": [
     "winston",
